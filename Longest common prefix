@@ -1,0 +1,26 @@
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+string longestCommonPrefix(vector<string>& strs) {
+    string ans = "";
+    for (int i = 0; i < strs[0].size(); i++) {
+        char ch = strs[0][i];  // pick character from first word
+        for (int j = 1; j < strs.size(); j++) {
+            if (i >= strs[j].size() || strs[j][i] != ch) {
+                return ans; // mismatch -> return answer so far
+            }
+        }
+        ans += ch; // if all matched, add to answer
+    }
+    return ans;
+}
+
+int main() {
+    vector<string> words1 = {"flower","flow","flight"};
+    vector<string> words2 = {"dog","racecar","car"};
+
+    cout << longestCommonPrefix(words1) << endl; // fl
+    cout << longestCommonPrefix(words2) << endl; // (empty)
+}
