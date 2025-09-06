@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int countSubstrings(string s) {
+    int n = s.size();
+    return n * (n + 1) / 2;
+}
+
+int main() {
+    string s = "abc";
+    cout << "Total substrings: " << countSubstrings(s) << endl;
+    return 0;
+}
