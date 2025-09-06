@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int beautySum(string s) {
+    int n = s.size();
+    int total = 0;
+
+    // Fix starting point
+    for (int i = 0; i < n; i++) {
+        vector<int> freq(26, 0);
+
+        // Expand substring ending at j
+        for (int j = i; j < n; j++) {
+            freq[s[j] - 'a']++;
+
+            int maxFreq = 0, minFreq = 1e9;
+
+            for (int f : freq) {
+                if (f > 0) {
+                    maxFreq = max(maxFreq, f);
+                    minFreq = min(minFreq, f);
+                }
+            }
+            total += (maxFreq - minFreq);
+        }
+    }
+
+    return total;
+}
+
+int main() {
+    string s = "aabcb";
+    cout << beautySum(s) << endl;  // Output: 5
+    return 0;
+}
