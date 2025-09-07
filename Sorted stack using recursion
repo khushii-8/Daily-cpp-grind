@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function to insert an element into sorted stack
+void insertSorted(stack<int> &st, int x) {
+    // base case: stack empty or top <= x
+    if (st.empty() || st.top() <= x) {
+        st.push(x);
+        return;
+    }
+
+    int temp = st.top();
+    st.pop();
+    insertSorted(st, x);
+    st.push(temp);
+}
+
+// Function to sort the stack
+void sortStack(stack<int> &st) {
+    if (st.empty()) return;
+
+    int x = st.top();
+    st.pop();
+
+    sortStack(st);       // sort smaller stack
+    insertSorted(st, x); // insert x in sorted order
+}
+
+// Function to print stack
+void printStack(stack<int> st) {
+    while (!st.empty()) {
+        cout << st.top() << " ";
+        st.pop();
+    }
+    cout << endl;
+}
+
+int main() {
+    stack<int> st;
+    st.push(30);
+    st.push(-5);
+    st.push(18);
+    st.push(14);
+    st.push(-3);
+
+    cout << "Original Stack: ";
+    printStack(st);
+
+    sortStack(st);
+
+    cout << "Sorted Stack: ";
+    printStack(st);
+
+    return 0;
+}
