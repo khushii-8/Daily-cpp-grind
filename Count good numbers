@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+const long long MOD = 1e9+7;
+
+// fast modular exponentiation
+long long modPow(long long base, long long exp, long long mod) {
+    long long res = 1;
+    while (exp > 0) {
+        if (exp % 2 == 1) res = (res * base) % mod;
+        base = (base * base) % mod;
+        exp /= 2;
+    }
+    return res;
+}
+
+long long countGoodNumbers(long long n) {
+    long long evenCount = (n + 1) / 2; // ceil(n/2)
+    long long oddCount = n / 2;        // floor(n/2)
+
+    long long ans = (modPow(5, evenCount, MOD) * modPow(4, oddCount, MOD)) % MOD;
+    return ans;
+}
+
+int main() {
+    long long n;
+    cin >> n;
+    cout << countGoodNumbers(n) << endl;
+    return 0;
+}
