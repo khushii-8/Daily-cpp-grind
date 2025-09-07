@@ -1,0 +1,10 @@
+int atoiRecursive(string &s, int i = 0) {
+    // base case
+    if (i == s.length()) return 0;
+
+    // get digit
+    int digit = s[i] - '0';
+
+    // build number: digit + rest * 10
+    return digit + 10 * atoiRecursive(s, i + 1);
+}
