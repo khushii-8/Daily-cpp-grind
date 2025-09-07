@@ -1,0 +1,14 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+double power(double x, int n) {
+    if (n == 0) return 1;           // base case
+    if (n < 0) return 1 / power(x, -n);  // handle negative powers
+    return x * power(x, n - 1);     // multiply x, reduce n
+}
+
+int main() {
+    cout << power(2, 5) << endl;   // 32
+    cout << power(3, 3) << endl;   // 27
+    cout << power(2, -3) << endl;  // 0.125
+}
