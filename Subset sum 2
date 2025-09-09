@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void backtrack(int start, vector<int>& arr, vector<int>& subset, vector<vector<int>>& result) {
+    result.push_back(subset);
+
+    for (int i = start; i < arr.size(); i++) {
+        // skip duplicates
+        if (i > start && arr[i] == arr[i-1]) continue;
+
+        subset.push_back(arr[i]);
+        backtrack(i+1, arr, subset, result);
+        subset.pop_back();
+    }
+}
+
+vector<vector<int>> subsetsWithDup(vector<int>& arr) {
+    sort(arr.begin(), arr.end()); // sort to handle duplicates
+    vector<vector<int>> result;
+    vector<int> subset;
+    backtrack(0, arr, subset, result);
+    return result;
+}
+
+int main() {
+    vector<int> arr = {1, 2, 2};
+    vector<vector<int>> ans = subsetsWithDup(arr);
+
+    cout << "All unique subsets:\n";
+    for (auto& s : ans) {
+        cout << "[ ";
+        for (int num : s) cout << num << " ";
+        cout << "]\n";
+    }
+}
