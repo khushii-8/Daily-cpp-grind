@@ -1,0 +1,19 @@
+class Solution {
+public:
+    string toHex(int num) 
+    {
+        if (num == 0) return "0";
+        
+        const char *hexChars = "0123456789abcdef";
+        string result = "";
+        for (int i = 0; i < 8 && num != 0; ++i) 
+        {
+            int digit = num & 0xF;             
+            result.push_back(hexChars[digit]); 
+            num = static_cast<unsigned int>(num) >> 4;
+        }
+    
+        reverse(result.begin(), result.end());
+        return result;
+    }
+};
