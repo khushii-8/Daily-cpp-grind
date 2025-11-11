@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> answerQueries(vector<int>& nums, vector<int>& queries) {
+        
+        sort(nums.begin(),nums.end());
+        int m=nums.size();
+        vector<int>arr;
+       int n=queries.size();
+        vector<int>pre(m);
+        pre[0]=nums[0];
+        for(int i=1; i<m; i++){
+            pre[i]=pre[i-1]+nums[i];
+        }
+
+        int j=0;
+        while(j<n){
+            int i=0;
+            int c=0;
+            while(i<m && pre[i]<=queries[j]){
+                c++;
+                i++;
+
+            }
+            j++;
+            arr.push_back(c);
+        }
+        return arr;
+        
+    }
+};
