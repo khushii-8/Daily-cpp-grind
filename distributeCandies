@@ -1,0 +1,48 @@
+class Solution {
+public:
+    vector<int> distributeCandies(int n, int num) {
+
+        long long low = 1, high = n, mid;
+        long long p = 0;
+
+        // find maximum k such that 1+2+...+k <= n
+        while (low <= high) {
+            mid = low + (high - low) / 2;
+            p = mid * (mid + 1) / 2;
+            if (p > n) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        vector<int> ans(num, 0);
+
+        long long k = high;                     // total steps
+        long long rounds = k / num;             // full rounds
+        long long remSteps = k % num;           // extra steps
+        long long used = k * (k + 1) / 2;
+        long long remaining = n - used;         // remaining candies
+
+        // distribute full rounds using AP formula
+        for (int i = 0; i < num; i++) {
+            long long a = i + 1;
+            long long d = num;
+            long long r = rounds;
+
+            ans[i] = r * (2 * a + (r - 1) * d) / 2;
+        }
+
+        // distribute remaining steps
+        for (int i = 0; i < remSteps; i++) {
+            ans[i] += rounds * num + (i + 1);
+        }
+
+        // add leftover candies
+        if (remaining > 0) {
+            ans[remSteps] += remaining;
+        }
+
+        return ans;
+    }
+};
