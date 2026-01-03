@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int minLength(vector<int>& nums, int k) {
+        unordered_map<int,int>freq;
+        int n=nums.size();
+        int l=0;
+        long long dist=0;
+        int ans=INT_MAX;
+        for(int r=0;r<n;r++){
+            if(freq[nums[r]]==0){
+                dist+=nums[r];
+            }
+        freq[nums[r]]++;
+        while(dist>=k){
+            ans=min(ans,r-l+1);
+            freq[nums[l]]--;
+            if(freq[nums[l]]==0){
+                dist-=nums[l];
+            }
+            l++;
+        }
+    }
+        return ans==INT_MAX? -1:ans;
+    }    
+};
