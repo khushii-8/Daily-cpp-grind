@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool judgeCircle(string moves) {
+        if(moves.empty()) return 0;
+        int ver_dist = 0, hori_dist = 0;
+
+        for(char i : moves){
+            if(i == 'U') ver_dist++;
+            if(i == 'D') ver_dist--;
+            if(i == 'R') hori_dist++;
+            if(i == 'L') hori_dist--;
+        }
+        return hori_dist == 0 && ver_dist == 0;
+    }
+};
