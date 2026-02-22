@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int binaryGap(int n) {
+        string bin = "";
+        
+        // Convert to binary
+        while (n > 0) {
+            bin = char((n % 2) + '0') + bin;
+            n /= 2;
+        }
+        
+        int prev = -1;
+        int maxDist = 0;
+        
+        for (int i = 0; i < bin.length(); i++) {
+            if (bin[i] == '1') {
+                if (prev != -1) {
+                    maxDist = max(maxDist, i - prev);
+                }
+                prev = i;
+            }
+        }
+        
+        return maxDist;
+    }
+};
