@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string s) {
+        vector<string> words;
+        string word;
+        stringstream ss(s);
+        
+        while(ss >> word)
+            words.push_back(word);
+        
+        if(words.size() != pattern.size())
+            return false;
+        
+        for(int i = 0; i < pattern.size(); i++) {
+            if(pattern.find(pattern[i]) != 
+               find(words.begin(), words.end(), words[i]) - words.begin())
+                return false;
+        }
+        
+        return true;
+    }
+};
